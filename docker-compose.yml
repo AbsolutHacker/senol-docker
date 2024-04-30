@@ -1,5 +1,26 @@
 services:
-  web:
-    build: webserver-image
+
+  wp:
+    image: wordpress:latest
+    environment:
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=40b03b820064a71af4ee69a8b4a935853f1c133249492a998a22ef5fbb4e268f2d1b634a69addccb4b77c5359b8ea04d8cb914b62da04c0f0cc84f10c52f6eef
+      - WORDPRESS_DB_NAME=wordpress
+    volumes:
+      - wp_data:/var/www/html
     ports:
       - "80:80"
+      - "443:443"
+
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=40b03b820064a71af4ee69a8b4a935853f1c133249492a998a22ef5fbb4e268f2d1b634a69addccb4b77c5359b8ea04d8cb914b62da04c0f0cc84f10c52f6eef
+      - MYSQL_DATABASE=wordpress
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  wp_data:
+  mysql_data:
