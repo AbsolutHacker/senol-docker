@@ -9,6 +9,8 @@ services:
       - WORDPRESS_DB_NAME=wordpress
     volumes:
       - wp_data:/var/www/html
+    networks:
+      - backend
     ports:
       - "80:80"
       - "443:443"
@@ -20,7 +22,12 @@ services:
       - MYSQL_DATABASE=wordpress
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - backend
 
 volumes:
   wp_data:
   mysql_data:
+
+networks:
+  backend:
